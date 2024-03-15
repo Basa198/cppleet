@@ -5,18 +5,16 @@
 class Solution {
 public:
     std::vector<int> twoSum(std::vector<int>& numbers, int target) {
-        std::unordered_map<int, int> diffMap; // hashmap with difference as the key and index as a value
+        int n = numbers.size();
+        int i = 0;
+        int j = n - 1;
 
-        int arrLength = numbers.size();
-
-        for (int i = 0; i < arrLength; i++) {
-            if (diffMap.find(numbers[i]) != diffMap.end()) {
-                int index = diffMap[numbers[i]];
-                return std::vector{index + 1, i + 1};
-            }
-            diffMap[target - numbers[i]] = i;
+        while (i < j) {
+            if (numbers[i] + numbers[j] > target) j--;
+            else if (numbers[i] + numbers[j] < target) i++;
+            else return {i + 1, j + 1};
         }
 
-        return std::vector{0, 0};
+        return {-1, -1};
     }
 };
